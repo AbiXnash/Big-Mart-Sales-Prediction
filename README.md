@@ -1,43 +1,29 @@
 # Big-Mart-Sales-Prediction
 
-## Introduction
-Big-Mart-Sales-Prediction is a project focused on predicting sales for Big Mart using various machine learning techniques. The project utilizes Jupyter notebooks (`.ipynb` files) to explore and analyze the data, build models, and evaluate their performance.
+Predicts `Item_Outlet_Sales` for the [Big Mart Sales](https://www.kaggle.com/datasets/brijbhushannanda1979/bigmart-sales-data)
+dataset with a Random Forest, in one Google Colab notebook.
 
-## Features
-- Sales prediction using machine learning models
-- Exploratory data analysis and visualization
-- Model evaluation and comparison
-- Easy-to-follow Jupyter notebooks
+## What the notebook does
 
-## Installation
-To install Big-Mart-Sales-Prediction, follow these steps:
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/AbiXnash/Big-Mart-Sales-Prediction.git
-   ```
-2. Navigate to the project directory:
-   ```sh
-   cd Big-Mart-Sales-Prediction
-   ```
-3. Install the required dependencies:
-   ```sh
-   pip install -r requirements.txt
-   ```
+1. Loads `train_ds.csv.zip` and `test_ds.csv.zip` and fills missing `Item_Weight` and `Outlet_Size` values.
+2. Groups `Item_Type` into foods, drinks and non-consumables (from the `Item_Identifier` prefix) and cleans
+   `Item_Fat_Content` (non-consumables get their own class).
+3. Replaces zero `Item_Visibility` with the mean and adds `Years_of_Operation` (up to 2013, the dataset's year).
+4. One-hot encodes the categorical columns and scales the features.
+5. Trains `RandomForestRegressor` on a 90/10 split, prints MAE, MSE, RMSE and R², and tunes it with `GridSearchCV`.
 
-## Usage
-To run the Jupyter notebooks, use the following command:
-```sh
-jupyter notebook
+## Run it
+
+The notebook was written for Colab: it reads the data from `/content/` and mounts Google Drive. To run it locally,
+download the dataset and change the two `read_csv` paths.
+
+```bash
+pip install pandas numpy scikit-learn matplotlib seaborn jupyter
+jupyter notebook Big_Mart_Sales_Prediction.ipynb
 ```
-Open the desired `.ipynb` file in your browser to explore and run the code.
 
-## Contribution
-Contributions are welcome! Please follow these steps to contribute:
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature-branch`).
-3. Make your changes and commit them (`git commit -m 'Add new feature'`).
-4. Push to the branch (`git push origin feature-branch`).
-5. Open a pull request.
+The dataset isn't included in this repository.
 
-## License
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+## Licence
+
+MIT, see [LICENSE](LICENSE).
